@@ -1,1 +1,150 @@
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+struct node
+{int data;
+struct node *next;
+}*temp,*head,*tail,*new;
+void create_ll()
+{   		int val;
+		    char ch;
+	do{
+		new=(struct node *)malloc(sizeof(struct node));
+		printf("enter the value:  ");
+		scanf("%d",&val);
+		new->data=val;
+		new->next=NULL;
+		if(head==NULL)
+		{
+			head=new;
+			tail=new;
+		}
+		else{
+	            tail->next=new;
+				tail=new;		
+		    }
+		    printf("Y-for continue and N-for exit");
+		    fflush(stdin);
+		    scanf("%c",&ch);
+	}
+	while(ch=='Y');
+}
+void display_ll()
+{
+	temp=head;
+	while(temp!=NULL)
+	{
+		printf("%d\n",temp->data);
+		temp=temp->next;
+	}
+}
+void insert_beg()
+{   int val;
+	new=(struct node *)malloc(sizeof(struct node));
+	printf("enter the value\n");
+	scanf("%d",&val);
+	new->data=val;
+	new->next=head;
+	head=new;
+}
+void insert_end()
+{   int val;
+	new=(struct node *)malloc(sizeof(struct node));
+	printf("enter the value \n");
+	scanf("%d",&val);
+	new->data=val;
+	new->next=NULL;
+	tail->next=new;
+	tail=new;
+}
+void insert_specific()
+{   
+    int i,pos,val;
+	new=(struct node *)malloc(sizeof(struct node));
+	printf("enter the position after which element store\n");
+	scanf("%d",&pos);
+	printf("enter the valuue you wants to inseert ");
+	scanf("%d",&val);
+	new->data=val;
+	for(i=0;i<pos-1;i++)
+	{
+		temp=temp->next;
+	}
+	new->next=temp->next;
+	temp->next=new;
+}
+void delete_beg()
+{
+	temp=head;
+	head=head->next;
+	temp->next=NULL;
+}
+void delete_end()
+{
+	temp=head;
+	while(temp->next!=NULL)
+	{
+		temp=temp->next;
+	}
+	temp->next=NULL;
+	tail=temp;
+}
+void delete_specific()
+{
+	int pos,i;
+	printf("enter the position you want to delete\n");
+	scanf("%d",&pos);
+	for(i=0;i<pos-1;i++)
+	{
+		temp=temp->next;
+	}
+	temp->next=temp->next->next;
+}
+
+int main()
+{
+	int i=1,j;
+
+	while(i>0)
+	{
+		printf("enter your choice\n");
+		printf("press 1 for creating list\n");
+		printf("press 2 for display list\n");
+		printf("press 3 for insert element at begining of list\n");
+		printf("press 4 for insert element at end list\n");
+		printf("press 5 for insert element at specific position of list\n");
+		printf("press 6 for deleting element at begining of list\n");
+		printf("press 7 for deleting element from end of list\n");
+		printf("press 8 for deleting element from specific position of list\n");
+		printf("press 9 for exit list\n");
+	    scanf("%d",&j);
+	    switch(j)
+	    {
+	    	case 1: create_ll();
+	    	         break;
+	    	case 2: display_ll();
+	    	         break;  
+			case 3: insert_beg();
+	    	         break;
+			case 4: insert_end();
+	    	         break;
+			case 5: insert_specific();
+	    	         break;
+			case 6: delete_beg();
+	    	         break;
+			case 7: delete_end();
+	    	         break;
+			case 8: delete_specific();
+	    	         break;
+			case 9: exit(-1);
+	    	default:printf("invalid choice\n");
+			break;		 		 		 		 		 		 		        
+		}
+			printf("press greater than 0 for continue\n");
+	        scanf("%d",&i);
+		
+	}
+	return 0;
+}
+
 
